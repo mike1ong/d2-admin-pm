@@ -13,6 +13,8 @@ import i18n from './i18n'
 import d2Admin from '@/plugin/d2admin'
 // 路由
 import router from './router'
+
+import util from '@/libs/util.js'
 // 核心插件
 Vue.use(d2Admin, { store })
 
@@ -21,10 +23,10 @@ new Vue({
   store,
   i18n,
   render: h => h(App),
-  created() {
+  created () {
 
   },
-  mounted() {
+  mounted () {
     // 展示系统信息
     this.$store.commit('d2admin/releases/versionShow')
     // 用户登录后从数据库加载一系列的设置
@@ -33,9 +35,16 @@ new Vue({
     this.$store.commit('d2admin/ua/get')
     // 初始化全屏监听
     this.$store.dispatch('d2admin/fullscreen/listen')
+
+    this.$store.dispatch('d2admin/lang/load').then(() => {
+      let lang = this.$store.state.d2admin.lang
+      console.log(lang.value)
+      this.$i18n.locale = lang.value || 'cn'
+      util.cookies.set('lang', this.$i18n.locale)
+    })
   },
   watch: {
-    '$route.matched'(val) {
+    '$route.matched' (val) {
       let fullAside = this.$store.state.d2admin.menu.fullAside
       const _side = fullAside.filter(menu => menu.path === val[0].path)
       this.$store.commit('d2admin/menu/asideSet', _side.length > 0 ? _side[0].children : [])

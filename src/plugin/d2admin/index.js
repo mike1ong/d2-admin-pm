@@ -12,9 +12,10 @@ import pluginError from '@/plugin/error'
 import pluginLog from '@/plugin/log'
 import pluginOpen from '@/plugin/open'
 import pluginPermission from '@/plugin/permission'
+import i18n from '@/i18n'
 
 export default {
-  async install(Vue, options) {
+  async install (Vue, options) {
     // 设置为 false 以阻止 vue 在启动时生成生产提示。https://cn.vuejs.org/v2/api/#productionTip
     Vue.config.productionTip = false
     // 当前环境
@@ -22,7 +23,9 @@ export default {
     // 当前的 baseUrl
     Vue.prototype.$baseUrl = process.env.BASE_URL
     // Element
-    Vue.use(ElementUI)
+    Vue.use(ElementUI, {
+      i18n: (key, value) => i18n.t(key, value)
+    })
     // 插件
     Vue.use(pluginError)
     Vue.use(pluginLog)

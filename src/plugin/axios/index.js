@@ -1,7 +1,9 @@
 import store from '@/store'
 import axios from 'axios'
 import router from '@/router/index'
-import { Message } from 'element-ui'
+import {
+  Message
+} from 'element-ui'
 import util from '@/libs/util'
 import loading from '@/libs/loading'
 import message from '@/libs/message'
@@ -30,7 +32,7 @@ function errorLog (err) {
 
 // 创建一个 axios 实例
 const service = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? '/api/index.php/' : 'http://localhost:3000/',
+  baseURL: process.env.NODE_ENV === 'production' ? '/api/index.php/' : 'http://localhost/api/index.php',
   timeout: 20000 // 请求超时时间
 })
 
@@ -38,10 +40,11 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (!permission.access(config, store)) {
-      throw {
+      let obj = {
         type: '403',
         config: config
       }
+      throw obj
     }
     loading.show(config)
     // 在请求发送之前做一些处理
@@ -50,6 +53,12 @@ service.interceptors.request.use(
       if (token && token !== 'undefined') {
         // 让每个请求携带token-- ['Authorization']为自定义key 请根据实际情况自行修改
         config.headers['Authorization'] = 'Bearer ' + token
+      }
+
+      const lang = util.cookies.get('lang')
+      if (lang && lang !== 'undefined') {
+        // 让每个请求携带token-- ['Authorization']为自定义key 请根据实际情况自行修改
+        config.headers['lang'] = lang
       }
     }
     return config
@@ -82,7 +91,7 @@ service.interceptors.response.use(
     console.log(error)
     loading.hide(error.config)
     if (error.response && error.response.status === 401) {
-      util.cookies.remove()
+      util.cookies.remove('token')
       if (error.config.url.indexOf('logout') === -1) {
         Message({
           message: '登陆信息已过期,请重新登陆!',
