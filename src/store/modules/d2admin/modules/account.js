@@ -1,6 +1,6 @@
 import util from '@/libs/util.js'
 import { AccountLogin } from '@/api/sys/login'
-
+var md5 = require('js-md5')
 export default {
   namespaced: true,
   actions: {
@@ -12,7 +12,7 @@ export default {
      * @param {Object} param password {String} 密码
      * @param {Object} param route {Object} 登录成功后定向的路由对象
      */
-    login({ dispatch }, {
+    login ({ dispatch }, {
       vm,
       username,
       password,
@@ -20,10 +20,12 @@ export default {
         name: 'index'
       }
     }) {
+      let pwd = md5(password)
       // 开始请求登录接口
       AccountLogin({
         username,
-        password
+        password,
+        pwd
       })
         .then(async res => {
           // 设置 cookie 一定要存 uuid 和 token 两个 cookie
@@ -56,11 +58,11 @@ export default {
      * @param {Object} param vm {Object} vue 实例
      * @param {Object} param confirm {Boolean} 是否需要确认
      */
-    logout({ commit }, { vm, confirm = false }) {
+    logout ({ commit }, { vm, confirm = false }) {
       /**
        * @description 注销
        */
-      function logout() {
+      function logout () {
         // 删除cookie
         util.cookies.remove('token')
         util.cookies.remove('uuid')
@@ -80,10 +82,10 @@ export default {
           .then(() => {
             commit('d2admin/gray/set', false, { root: true })
             logout()
-            //注销后重置应用，目前没有找到更好的方法
+            // 注销后重置应用，目前没有找到更好的方法
             setTimeout(() => {
               location.reload()
-            }, 1000);
+            }, 1000)
           })
           .catch(() => {
             commit('d2admin/gray/set', false, { root: true })
@@ -93,14 +95,14 @@ export default {
         logout()
         setTimeout(() => {
           location.reload()
-        }, 1000);
+        }, 1000)
       }
     },
     /**
      * @description 用户登录后从持久化数据加载一系列的设置
      * @param {Object} state vuex state
      */
-    load({ commit, dispatch }) {
+    load ({ commit, dispatch }) {
       return new Promise(async resolve => {
         // DB -> store 加载用户名
         await dispatch('d2admin/user/load', null, { root: true })
