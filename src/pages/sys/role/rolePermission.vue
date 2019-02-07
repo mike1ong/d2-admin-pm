@@ -68,7 +68,9 @@ export default {
       roleService.savePermission(data).then(data => {
         this.loading = false;
         this.dialogVisible = false;
-      });
+      }).catch(err => {
+        this.loading = false;
+      })
     },
     close() {
       this.dialogVisible = false;

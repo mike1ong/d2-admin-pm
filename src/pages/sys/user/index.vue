@@ -62,6 +62,14 @@
     >
       删除
     </el-button>
+    <el-button
+      type="primary"
+      size="mini"
+      icon="el-icon-circle-plus"
+      @click="vexport"
+    >
+      导出
+    </el-button>
     <el-table
       :data="tableData"
       v-loading="loading"
@@ -109,7 +117,7 @@
         </template>
       </el-table-column>
       <el-table-column
-        label="phone"
+        label="电话"
         :show-overflow-tooltip="true"
       >
         <template slot-scope="scope">
@@ -250,6 +258,18 @@ export default {
     add() {
       this.user = {};
       this.editFormVisible = true;
+    },
+    vexport() {
+      this.$export.excel({
+        title: '用户信息',
+        columns: [
+          { label: '账号名称', prop: 'name' },
+          { label: '用户名称', prop: 'trueName' },
+          { label: '邮箱', prop: 'email' },
+          { label: '电话', prop: 'phone' }
+        ],
+        data:   this.tableData
+      })
     },
     openUserRoleDialog(user) {
       this.user = user;

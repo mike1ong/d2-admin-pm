@@ -13,6 +13,7 @@ import pluginLog from '@/plugin/log'
 import pluginOpen from '@/plugin/open'
 import pluginPermission from '@/plugin/permission'
 import i18n from '@/i18n'
+import pluginExport from '@d2-projects/vue-table-export'
 
 export default {
   async install (Vue, options) {
@@ -30,6 +31,7 @@ export default {
     Vue.use(pluginError)
     Vue.use(pluginLog)
     Vue.use(pluginOpen)
+    Vue.use(pluginExport)
     Vue.use(pluginPermission, options)
   }
 }

@@ -1,6 +1,9 @@
 <template>
   <el-dropdown placement="bottom" size="small" @command="handleChange">
-    <span class="btn-text"> {{ $t('pub.lang') }}</span>
+    
+     <el-button class="d2-mr btn-text can-hover" type="text" >
+    <d2-icon name="globe" style="font-size: 18px;"><span class="btn-text"> {{ $t('pub.lang') }}</span></d2-icon>
+  </el-button>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="cn">
         <d2-icon :name="iconName('cn')" class="d2-mr-5"/>中文
@@ -54,6 +57,7 @@ export default {
       this.langSet(value)
       this.$i18n.locale = value
       util.cookies.set('lang', this.$i18n.locale)
+      location.reload();
     },
     iconName (name) {
       return name === this.value ? 'dot-circle-o' : 'circle-o'

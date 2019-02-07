@@ -103,7 +103,10 @@ export default {
               this.loading = false;
               this.dialogVisible = false;
               this.$emit("submit");
-            });
+            })
+            .catch(err => {
+              this.loading = false;
+            })
         } else {
           return false;
         }

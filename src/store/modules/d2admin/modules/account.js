@@ -20,12 +20,11 @@ export default {
         name: 'index'
       }
     }) {
-      let pwd = md5(password)
+      let pwd = md5('pandaevents' + password)
       // 开始请求登录接口
       AccountLogin({
         username,
-        password,
-        pwd
+        password: pwd
       })
         .then(async res => {
           // 设置 cookie 一定要存 uuid 和 token 两个 cookie

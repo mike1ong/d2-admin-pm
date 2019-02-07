@@ -31,7 +31,7 @@
       <div class="d2-mb-10">
         <el-button type="danger" size="mini" @click="handleLogClean">
           <d2-icon name="trash-o"/>
-          清空
+          {{$t('pub.name.clear')}}
         </el-button>
       </div>
       <d2-error-log-list/>

@@ -38,19 +38,19 @@
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="left">
             <d2-icon name="arrow-left" class="d2-mr-10"/>
-            关闭左侧
+            {{$t('pub.name.closeleft')}}
           </el-dropdown-item>
           <el-dropdown-item command="right">
             <d2-icon name="arrow-right" class="d2-mr-10"/>
-            关闭右侧
+            {{$t('pub.name.closeright')}}
           </el-dropdown-item>
           <el-dropdown-item command="other">
             <d2-icon name="times" class="d2-mr-10"/>
-            关闭其它
+            {{$t('pub.name.closeother')}}
           </el-dropdown-item>
           <el-dropdown-item command="all">
             <d2-icon name="times-circle" class="d2-mr-10"/>
-            全部关闭
+           {{$t('pub.name.closeall')}}
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -71,13 +71,13 @@ export default {
       contentmenuX: 0,
       contentmenuY: 0,
       contextmenuListIndex: [
-        { icon: 'times-circle', title: '关闭全部', value: 'all' }
+        { icon: 'times-circle', title: this.$t('pub.name.closeall'), value: 'all' }
       ],
       contextmenuList: [
-        { icon: 'arrow-left', title: '关闭左侧', value: 'left' },
-        { icon: 'arrow-right', title: '关闭右侧', value: 'right' },
-        { icon: 'times', title: '关闭其它', value: 'other' },
-        { icon: 'times-circle', title: '关闭全部', value: 'all' }
+        { icon: 'arrow-left', title: this.$t('pub.name.closeleft'), value: 'left' },
+        { icon: 'arrow-right', title: this.$t('pub.name.closeright'), value: 'right' },
+        { icon: 'times', title: this.$t('pub.name.closeother'), value: 'other' },
+        { icon: 'times-circle', title: this.$t('pub.name.closeall'), value: 'all' }
       ],
       tagName: 'index'
     }

@@ -9,6 +9,13 @@ export function getUser (id) {
     }
   })
 }
+export function changePassword (data) {
+  return request({
+    url: '/user/changepassword',
+    method: 'post',
+    data: data
+  })
+}
 export function getUserPermissionInfo () {
   return request({
     url: '/user/info',

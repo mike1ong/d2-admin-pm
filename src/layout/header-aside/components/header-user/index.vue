@@ -1,21 +1,33 @@
 <template>
+  <div>
   <el-dropdown size="small" class="d2-mr">
-    <span class="btn-text">你好 {{info.name}}</span>
+    <span class="btn-text">{{$t('pub.pageHeader.hello')}} {{info.name}}</span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item @click.native="logOff">
-        <d2-icon name="power-off" class="d2-mr-5" /> 注销
+        <d2-icon name="power-off" class="d2-mr-5" /> {{$t('pub.name.logout')}}
       </el-dropdown-item>
-      <el-dropdown-item @click.native="resetDb">
-        <i class="el-icon-refresh"></i> 初始化
+      <el-dropdown-item @click.native="resetPwd">
+        <i class="el-icon-refresh"></i> {{$t('pub.name.resetpwd')}}
       </el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
+
+  <edit-form v-model="dialogVisible"/>
+  </div>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
 import * as sysService from "@/api/sys/sys";
-export default {
+import editForm from "./editForm";
+export default {  
+  data () {
+    return {
+      reg: {},
+      dialogVisible: false
+    }
+  },
+  components: { editForm },
   computed: {
     ...mapState("d2admin/user", ["info"])
   },
@@ -30,12 +42,8 @@ export default {
         confirm: true
       });
     },
-    resetDb() {
-      sysService.resetDb().then(() => {
-        setTimeout(() => {
-          location.reload();
-        }, 1500);
-      });
+    resetPwd() {
+      this.dialogVisible = true;
     }
   }
 };

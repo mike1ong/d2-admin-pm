@@ -6,7 +6,6 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 import store from '@/store/index'
-
 import util from '@/libs/util.js'
 
 // 路由数据
