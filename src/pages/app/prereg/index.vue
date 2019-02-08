@@ -49,6 +49,13 @@
       icon="el-icon-delete"
       @click="batchDel"
     >{{$t('pub.name.del')}}</el-button>
+    <el-button
+      type="success"
+      :title="$t('pub.name.vexport')"
+      size="mini"
+      icon="el-icon-download"
+      @click="vexport"
+    >{{$t('pub.name.vexport')}}</el-button>
     <el-table
       :data="tableData"
       v-loading="loading"
@@ -103,6 +110,14 @@
             icon="el-icon-delete"
             circle
             @click="del(scope.row.id)"
+          ></el-button>
+          <el-button
+            type="warning"
+            :title="$t('pub.name.resend')"
+            size="mini"
+            icon="el-icon-refresh"
+            circle
+            @click="resend(scope.row.id)"
           ></el-button>
         </template>
       </el-table-column>
@@ -226,6 +241,35 @@ export default {
           this.getTableData();
         });
       });
+    },
+    resend(id) {
+      this.$confirm(this.$t('pub.confirm.resend'), this.$t('pub.name.confirmation'), {
+        distinguishCancelAndClose: true,
+        confirmButtonText: this.$t('pub.name.resend'),
+        cancelButtonText:  this.$t('pub.name.cancel')
+      }).then(() => {
+        regService.resendReg(id).then(() => {
+          
+        });
+      });
+    },
+    vexport() {
+      let col=[
+          { label: 'DCI', prop: 'dci' },
+          { label: this.$t('pub.name.firstname'), prop: 'firstname' },
+          { label: this.$t('pub.name.lastname'), prop: 'lastname' },
+          { label: this.$t('pub.name.email'), prop: 'email' },
+          { label: this.$t('pub.name.orderno'), prop: 'orderno' },
+          { label: this.$t('pub.name.createtime'), prop: 'createtime' },
+        ];
+      if (this.hasCreator) {
+        col.push({label: this.$t('pub.name.creator'), prop: 'creator' })
+      }
+      this.$export.excel({
+        title: this.$t('pub.exp.title_reg'),
+        columns: col,
+        data:   this.tableData
+      })
     }
   }
 };

@@ -73,9 +73,9 @@ export default {
       // 判断是否需要确认
       if (confirm) {
         commit('d2admin/gray/set', true, { root: true })
-        vm.$confirm('注销当前账户吗?  打开的标签页和用户设置将会被保存。', '确认操作', {
-          confirmButtonText: '确定注销',
-          cancelButtonText: '放弃',
+        vm.$confirm(vm.$t('pub.confirm.exit'), vm.$t('pub.name.confirmation'), {
+          confirmButtonText: vm.$t('pub.name.logout'),
+          cancelButtonText: vm.$t('pub.name.cancel'),
           type: 'warning'
         })
           .then(() => {
@@ -88,7 +88,6 @@ export default {
           })
           .catch(() => {
             commit('d2admin/gray/set', false, { root: true })
-            vm.$message('放弃注销用户')
           })
       } else {
         logout()

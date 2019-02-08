@@ -47,10 +47,14 @@ export default {
       clear: '清空',
       oldpassword: '旧密码',
       newpassword: '新密码',
-      repeatpassword: '重新输入'
+      repeatpassword: '重新输入',
+      vexport: '导出',
+      resend: '重新发送'
     },
     confirm: {
-      del: '确认删除？'
+      del: '确认删除？',
+      exit: '注销当前账户吗?  打开的标签页和用户设置将会被保存。',
+      resend: '确认重新发送注册邮件给当前牌手？'
     },
     tips: {
       usehotkey: '您可以使用快捷键',
@@ -59,6 +63,9 @@ export default {
     },
     format: {
       email: '邮箱格式不对'
+    },
+    exp: {
+      title_reg: '牌手注册信息'
     },
     lang: 'Language',
     login: '登录',

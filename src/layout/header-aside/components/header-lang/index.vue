@@ -1,7 +1,7 @@
 <template>
   <el-dropdown placement="bottom" size="small" @command="handleChange">
     
-     <el-button class="d2-mr btn-text can-hover" type="text" >
+    <el-button class="d2-mr btn-text can-hover" type="text" >
     <d2-icon name="globe" style="font-size: 18px;"><span class="btn-text"> {{ $t('pub.lang') }}</span></d2-icon>
   </el-button>
     <el-dropdown-menu slot="dropdown">

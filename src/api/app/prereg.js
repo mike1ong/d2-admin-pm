@@ -44,6 +44,20 @@ export function delReg (id) {
     }
   })
 }
+export function resendReg (id) {
+  return request({
+    url: '/reg/resend',
+    method: 'get',
+    params: { id: id },
+    success: {
+      type: 'message',
+      options: {
+        message: 'Success',
+        type: 'success'
+      }
+    }
+  })
+}
 export function delRegs (ids) {
   return request({
     url: '/reg/batchdel',

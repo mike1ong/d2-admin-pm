@@ -47,10 +47,14 @@ export default {
       clear: 'Clear',
       oldpassword: 'Old password',
       newpassword: 'New password',
-      repeatpassword: 'Valid password'
+      repeatpassword: 'Valid password',
+      vexport: 'Export',
+      resend: 'Send Mail'
     },
     confirm: {
-      del: 'Delete this player?'
+      del: 'Delete this player?',
+      exit: 'Logout this session? your settings will be saved.',
+      resend: 'Resend registration mail to current player?'
     },
     tips: {
       usehotkey: 'You can use hotkey',
@@ -59,6 +63,9 @@ export default {
     },
     format: {
       email: 'invalid email'
+    },
+    exp: {
+      title_reg: 'Player Registration'
     },
     lang: '语言',
     login: 'Login',
