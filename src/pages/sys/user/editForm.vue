@@ -32,7 +32,7 @@
       </el-form-item>
       <el-form-item
         prop="phone"
-        label="phone"
+        label="电话"
       >
         <el-input v-model="form.phone"></el-input>
       </el-form-item>

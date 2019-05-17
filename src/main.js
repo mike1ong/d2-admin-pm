@@ -37,11 +37,13 @@ new Vue({
     this.$store.dispatch('d2admin/fullscreen/listen')
 
     this.$store.dispatch('d2admin/lang/load').then(() => {
-      let lang = util.cookies.get('lang')
-      if (!lang) {
-        lang = this.$store.state.d2admin.lang
+      let langA = util.cookies.get('lang')
+      let langB = this.$store.state.d2admin.lang.value
+
+      this.$i18n.locale = langA || langB || 'cn'
+      if (this.$i18n.locale !== 'en') {
+        this.$i18n.locale = 'cn'
       }
-      this.$i18n.locale = lang || lang.value || 'cn'
       this.$store.dispatch('d2admin/lang/set', this.$i18n.locale)
       util.cookies.set('lang', this.$i18n.locale)
     })
